@@ -26,7 +26,7 @@ def convert_first_page_to_image(pdf_path, image_path):
     """PDF의 첫 페이지를 이미지로 변환하는 함수"""
     try:
         # PDF를 이미지로 변환
-        images = convert_from_path(pdf_path, first_page=1, last_page=1)
+        images = convert_from_path(pdf_path, first_page=1, last_page=1, poppler_path='/opt/homebrew/bin')
         if images:
             # 첫 페이지 이미지 저장
             images[0].save(image_path, 'JPEG')

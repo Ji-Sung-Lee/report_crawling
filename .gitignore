@@ -1,6 +1,5 @@
-# Ignore first_page and report_pdf directories
-first_page/
-report_pdf/
+# Ignore data directories
+data/
 report_crawling_venv/
 
 # Python

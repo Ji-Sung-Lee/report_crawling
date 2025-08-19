@@ -61,8 +61,8 @@ def get_research_reports(page=1):
     today = datetime.now().strftime('%y.%m.%d')  # 오늘 날짜 형식 (예: 24.03.21)
     
     # 폴더 생성
-    os.makedirs('report_pdf', exist_ok=True)
-    os.makedirs('first_page', exist_ok=True)
+    os.makedirs('data/pdfs', exist_ok=True)
+    os.makedirs('data/images', exist_ok=True)
     
     for row in rows:
         cols = row.find_all('td')
@@ -87,8 +87,8 @@ def get_research_reports(page=1):
                     
                     # 파일명 생성 (종목명_제목.pdf)
                     safe_title = re.sub(r'[\\/*?:"<>|]', "", title)  # 파일명에 사용할 수 없는 문자 제거
-                    pdf_filename = f"report_pdf/{stock_name}_{safe_title}.pdf"
-                    image_filename = f"first_page/{stock_name}_{safe_title}.jpg"
+                    pdf_filename = f"data/pdfs/{stock_name}_{safe_title}.pdf"
+                    image_filename = f"data/images/{stock_name}_{safe_title}.jpg"
                     
                     # PDF 다운로드 및 첫 페이지 이미지 변환
                     if download_pdf(attachment_link, pdf_filename):
@@ -129,7 +129,8 @@ def main():
     
     # DataFrame 생성 및 저장
     df = pd.DataFrame(all_reports)
-    filename = f"research_reports_{datetime.now().strftime('%Y%m%d')}.csv"
+    os.makedirs('data/csv', exist_ok=True)
+    filename = f"data/csv/research_reports_{datetime.now().strftime('%Y%m%d')}.csv"
     df.to_csv(filename, index=False, encoding='utf-8-sig')
     print(f"\n크롤링 완료: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"총 {len(all_reports)}개의 오늘자 리포트를 {filename}에 저장했습니다.")

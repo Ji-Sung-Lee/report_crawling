@@ -1,6 +1,7 @@
 # Ignore first_page and report_pdf directories
 first_page/
 report_pdf/
+report_crawling_venv/
 
 # Python
 __pycache__/
